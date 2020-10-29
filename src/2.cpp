@@ -27,10 +27,18 @@ double** initDistanceMatrix(vector<Point> myVect, int size){
     }
     return distanceMatrix;
 }
+void deleteDistanceMatrix(double** matrix, int sz){
+  for (size_t i = 0; i < sz; i++)
+  {
+    delete[] matrix[i];
+  }
+  delete[] matrix;
+  
+}
 void findMinimum(int size){
     v.clear();
 
-    
+    cout<<"SIZE: "<<size<<endl;
     //Init vector
     vector<Point> myVect;
     myVect.push_back(Point(62.0, 58.4,1));
@@ -69,23 +77,25 @@ void findMinimum(int size){
 
     auto finish = std::chrono::high_resolution_clock::now();
     
-	cout<<std::chrono::duration_cast<std::chrono::microseconds>( finish-start ).count()<<endl;
+	cout<<"Measured performance: "<<std::chrono::duration_cast<std::chrono::milliseconds>( finish-start ).count()<<"ms"<<endl;
 	
-    cout<<min<<endl;
+    cout<<"Minimum distance: "<<min<<endl;
+    cout<<"Minimum distance path: ";
     for (size_t i = 0; i < size; i++)
       {
-        cout<<v.at(i)<<endl;
+        cout<<v.at(i)<<" ";
       }
-
+      cout<<endl;
 
       //Delete Matrix
-      for (size_t i = 0; i < size; i++)
-      {
-        /* code */
-      }
-      
+      deleteDistanceMatrix(distanceMatrix, size);
+
+      cout<<endl;
 }
+
 int main(){
 
    findMinimum(8);
+
+   findMinimum(12);
 }
