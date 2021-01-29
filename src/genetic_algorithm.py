@@ -62,12 +62,13 @@ def crossover_phase(population, population_fitness):
 # Mutation phase
 
 def mutation_phase(population, population_fitness):
-    for individual in population:
+    for i in range(len(population)):
+        individual = population[i]
         index = rand.randrange(0, individual_size)
-        if(rand.uniform(1) < mutation_probability_threshold):
+        if (rand.uniform(0, 1) < mutation_probability_threshold):
             individual[index] = 1 - individual[index]
-            
-        population_fitness.append(fitness(individual))
+
+        population_fitness[i] = fitness(individual)
 
     return population, population_fitness
 
